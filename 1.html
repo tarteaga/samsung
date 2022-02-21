@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script>
+        var provincias = {
+            01: "Alava",
+            02: "Albacete",
+            03: "Alicante",
+            04: "Almeria",
+            05: "Avila",
+            06: "Badajoz",
+            07: "Islas Baleares",
+            08: "Barcelona",
+            09: "Burgos",
+            10: "Caceres",
+            11: "Cadiz",
+            12: "Castellon",
+            13: "Ciudad Real",
+            14: "Cordoba",
+            15: "La Coruna",
+            16: "Cuenca",
+            17: "Gerona",
+            18: "Granada",
+            19: "Guadalajara",
+            20: "Guipuzcoa",
+            21: "Huelva",
+            22: "Huesca",
+            23: "Jaen",
+            24: "Leon",
+            25: "Lerida",
+            26: "La Rioja",
+            27: "Lugo",
+            28: "Madrid",
+            29: "Malaga",
+            30: "Murcia",
+            31: "Navarra",
+            32: "Orense",
+            33: "Asturias",
+            34: "Palencia",
+            35: "Las Palmas",
+            36: "Pontevedra",
+            37: "Salamanca",
+            37: "Salamanca",
+            38: "Santa Cruz de Tenerife",
+            39: "Cantabria",
+            40: "Segovia",
+            41: "Sevilla",
+            42: "Soria",
+            43: "Tarragona",
+            44: "Teruel",
+            45: "Toledo",
+            46: "Valencia",
+            47: "Valladolid",
+            48: "Vizcaya",
+            49: "Zamora",
+            50: "Zaragoza",
+            51: "Ceuta",
+            52: "Melilla"
+
+
+        }
+
+        function validar() {
+            var provinciaCorrecta = false;
+            var codigoPostal = document.getElementById("postal").value
+            console.log(codigoPostal.substring(0, 2));
+            var provincia = provincias[codigoPostal.substring(0, 2)];
+            console.log(provincia);
+            var valid = /^\d{5}$/.test(codigoPostal) && provincia !== undefined;
+            console.log(valid);
+            if (valid) {
+                provinciaCorrecta = window.confirm("¿Vive usted en la provincia " + provincia + "?");
+            }
+            if (provinciaCorrecta) {
+                writeInSpan("mensajevalidacion", "Provincia: " + provincia);
+                paintSpan("mensajevalidacion", "green");
+            } else if (provincia === undefined) {
+                writeInSpan("mensajevalidacion", "El Código Postal no corresponde a ninguna provincia");
+                paintSpan("mensajevalidacion", "red");
+            } else if (!valid) {
+                writeInSpan("mensajevalidacion", "El Código Postal no tiene el formato adecuado");
+                paintSpan("mensajevalidacion", "red");
+            } else {
+                writeInSpan("mensajevalidacion", "Este no es tu código postal, prueba de nuevo");
+                paintSpan("mensajevalidacion", "red");
+            }
+
+            return false;
+
+        }
+
+        function paintSpan(spanId, colorToPaint) {
+            document.getElementById(spanId).style.color = colorToPaint;
+        }
+
+        function mostrarValoracion() {
+            var valoracion = document.getElementById("valoracion").value;
+            var dialogoValoracion = document.getElementById("dialogoValoracion");
+            dialogoValoracion.style.display = "block";
+            writeInSpan("valor", valoracion);
+        }
+
+        function cerrarValoracion() {
+            var dialogoValoracion = document.getElementById("dialogoValoracion");
+            dialogoValoracion.style.display = "none";
+
+        }
+
+        function writeInSpan(spanId, textToWrite) {
+            document.getElementById(spanId).innerHTML = textToWrite;
+        }
+
+        function mostrarCuenta() {
+            var pais = document.getElementById("pais").value;
+            var ctrliban = document.getElementById("ctrliban").value;
+            var entidad = document.getElementById("entidad").value;
+            var sucursal = document.getElementById("sucursal").value;
+            var dc = document.getElementById("dc").value;
+            var cuentita = document.getElementById("cuentita").value;
+            var dialogoCuenta = document.getElementById("dialogoCuenta");
+            dialogoCuenta.style.display = "block";
+            writeInSpan("cuenta", pais + ctrliban + "-" + entidad + "-" + sucursal + "-" + dc + "-" + cuentita);
+        }
+
+        function cerrarCuenta() {
+            var dialogoCuenta = document.getElementById("dialogoCuenta");
+            dialogoCuenta.style.display = "none";
+        }
+
+        function writeInSpan(spanId, textToWrite) {
+            document.getElementById(spanId).innerHTML = textToWrite;
+        }
+
+        function mostrarDiaSemana() {
+            var dialogoDiaSemana = document.getElementById("dialogoDiaSemana");
+            var diasemana = document.getElementById("diasemana").value;
+            var date = new Date(diasemana);
+            var diasdelasemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+            dialogoDiaSemana.style.display = "block";
+            writeInSpan("fecha", diasdelasemana[date.getDay()]);
+
+        }
+
+        function cerrarDiaSemana() {
+            var dialogoDiaSemana = document.getElementById("dialogoDiaSemana");
+            dialogoDiaSemana.style.display = "none";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="custom-dialog" id="dialogoValoracion">
+        <div class="dialog-content">
+            <div class="dialog-body">
+                Has valorado con <span id="valor"></span> puntos
+            </div>
+            <div class="dialog-footer">
+                <button onclick="cerrarValoracion()" class="close">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <div class="custom-dialog" id="dialogoCuenta">
+        <div class="dialog-content">
+            <div class="dialog-body">
+                <p class="dialog-text">Le informamos que su número de cuenta es <span id="cuenta"></span><br /></p>
+            </div>
+            <div class="dialog-footer">
+                <button onclick="cerrarCuenta()" class="close">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <div class="custom-dialog" id="dialogoDiaSemana">
+        <div class="dialog-content">
+            <div class="dialog-body">
+                <p class="dialog-text">La fecha seleccionada en el elemento de fecha es un <span id="fecha"></span><br /></p>
+            </div>
+            <div class="dialog-footer">
+                <button onclick="cerrarDiaSemana()" class="close">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    <h1 class="bluetittle"> Formulario Información Alta Teléfonica</h1>
+    <form action="#" onsubmit="return validar()" name="telefonica">
+        <fieldset>
+            <legend>Datos Personales</legend>
+            Nombre:<input type="text" name="nombre" maxlength="30" /><br /> Apellidos:
+            <input type="text" name="apellido" maxlength="60" /><br /> Dirección:
+            <input type="text" name="dirección" maxlength="60" /><br /> Código Postal:<input type="number" name="codigopostal" size="5" id="postal" /><span id="mensajevalidacion"></span><br /> Localidad:
+            <input type="text" name="localidad" /><br />
+        </fieldset>
+        <fieldset>
+            <legend>Tipo de contratación</legend>
+            <input type="radio" name="internet" value="0" checked="checked">Nueva contratación
+            <input type="radio" name="internet" value="0">Portabilidad
+            <input type="radio" name="internet" value="0">Cambio de contrato <br /> Elija la compañía actual:
+            <select name="origen">
+                <option value="Movistar">Movistar</option>
+                <option value="Vodafone">Vodafone</option>
+                <option value="Orange">Orange</option>
+                <option value="Yoigo">Yoigo</option>
+                <option value="Nocomp">No Tengo Ninguna Compañía</option>
+            </select> En caso de portabilidad, elija la nueva compañía:
+            <select name="nuevo">
+                <option value="Movistar">Movistar</option>
+                <option value="Vodafone">Vodafone</option>
+                <option value="Orange">Orange</option>
+                <option value="Yoigo">Yoigo</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend>Datos bancarios</legend>
+            País: <input type="text" name="pais" value="ES" readonly="readonly" id="pais" /> (solo válido ES) <br /> Control IBAN: <input type="text" name="ciban" placeholder="XX" pattern="[0-9]{2}" id="ctrliban" />(dos dígitos)
+            <br /> Entidad: <input type="text" name="enti" placeholder="XXXX" pattern="[0-9]{4}" id="entidad" />(cuatro dígitos)
+            <br /> Sucursal: <input type="text" name="suc" placeholder="XXXX" pattern="[0-9]{4}" id="sucursal" />(cuatro dígitos)
+            <br /> DC: <input type="text" name="dc" placeholder="XX" pattern="[0-9]{2}" id="dc" />(dos dígitos)<br /> Cuenta: <input type="text" name="cuenta" placeholder="XXXXXXXXXX" pattern="[0-9]{10}" id="cuentita" />(diez digitos)
+            <br />
+        </fieldset>
+        <fieldset>
+            <legend>Datos Estadísticos - ¿Cómo nos conoció?</legend>
+            <input type="checkbox"> A través de la TV</input><br />
+            <input type="checkbox"> A través de la radio</input><br />
+            <input type="checkbox"> A través de internet</input><br />
+            <input type="checkbox"> Otros</input><br />
+            <input type="range" name="valor" min="1" max="5" id="valoracion" class="marca"></input>Valoración [1-5]<br /> Fecha de la encuesta:<input type="date" value="2019-01-01" id="diasemana" /> Valoración [1-5]
+        </fieldset>
+
+        <input type="submit" value="Enviar Datos " />
+        <input type="reset" value="Borrar Datos " /><br />
+    </form>
+    <button onclick="mostrarValoracion()" class="buttonpink">Mostrar <br /> Valoración</button>
+    <button onclick="mostrarCuenta()" class="buttonpink">Mostrar <br /> Cuenta</button>
+    <button onclick="mostrarDiaSemana()" class="buttonpink">Mostrar Dia <br /> Semana</button>
+
+</body>
+
+</html>

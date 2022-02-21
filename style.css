@@ -1,0 +1,92 @@
+.bluetittle {
+    color: blue;
+    text-align: center;
+}
+
+legend {
+    background-color: red;
+    color: white;
+}
+
+fieldset {
+    margin-top: 20px;
+    background-color: aqua;
+}
+
+input[type=text] {
+    border-style: none;
+    border-radius: 4px;
+    background-color: yellow;
+}
+
+input[type=number] {
+    border-style: none;
+    border-radius: 4px;
+    background-color: yellow;
+}
+
+.buttonpink {
+    background-color: pink;
+}
+
+.dialog-footer {
+    position: absolute;
+    bottom: 0px;
+    width: 218px;
+    background-color: #e0d5d5;
+    padding: 2px 16px;
+    height: 30%;
+}
+
+.close {
+    width: 70px;
+    top: 50%;
+    position: absolute;
+    transform: translate(-100%, -50%);
+    left: 90%;
+}
+
+.custom-dialog {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.dialog-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 250px;
+    height: 175px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dialog-body {
+    position: absolute;
+    width: 100%;
+    bottom: 87px;
+    text-align: center;
+}
+
+.marca {
+    border-radius: 1em/5em;
+}
